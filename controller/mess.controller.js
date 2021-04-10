@@ -91,18 +91,26 @@ class messtController {
                             // find chat
                             dbo.collection("chats").find({userSend:req.params.cookiesemail}).toArray((err,list)=>{
                                 dbo.collection("chats").findOne(query1, (err, result) => {
-                                    if (result) {
-                                        res.render("chat.ejs", {
-                                            cookiesemail: cookiesemail,
-                                            user: user,
-                                            data: result,
-                                        });
-                                    } else {
-                                        res.render("chat.ejs", {
-                                            cookiesemail: cookiesemail,
-                                            user: user,
-                                            data: 0,
-                                        });
+                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.slug === user.slug) {
+                                        // if(cookiesemail=== req.cookies.email){
+                                            console.log(cookiesemail.slug)
+                                            res.render("chat1.ejs", {
+                                                cookiesemail: cookiesemail,
+                                                user: user,
+                                                data: result,
+    
+                                            });
+                                        // }else {
+                                        //     res.render("chat1.ejs", {
+                                        //         cookiesemail: cookiesemail,
+                                        //         user: user,
+                                        //         data: result,
+    
+                                        //     });
+                                        // }
+                                    } 
+                                    else{
+                                        res.json('err')
                                     }
                                 });
                             });
@@ -129,20 +137,25 @@ class messtController {
                             // find chat
                             dbo.collection("chats").find({userSend:req.params.cookiesemail}).toArray((err,list)=>{
                                 dbo.collection("chats").findOne(query1, (err, result) => {
-                                    if (result) {
-                                        res.render("chat1.ejs", {
-                                            cookiesemail: cookiesemail,
-                                            user: user,
-                                            data: result,
-
-                                        });
-                                    } else {
-                                        res.render("chat1.ejs", {
-                                            cookiesemail: cookiesemail,
-                                            user: user,
-                                            data: result,
-
-                                        });
+                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.slug === user.slug) {
+                                        // if(cookiesemail=== req.cookies.email){
+                                            res.render("chat1.ejs", {
+                                                cookiesemail: cookiesemail,
+                                                user: user,
+                                                data: result,
+    
+                                            });
+                                        // }else {
+                                        //     res.render("chat1.ejs", {
+                                        //         cookiesemail: cookiesemail,
+                                        //         user: user,
+                                        //         data: result,
+    
+                                        //     });
+                                        // }
+                                    } 
+                                    else{
+                                        res.json('err')
                                     }
                                 });
                             });
