@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var classID = require('mongoose-classID-generator');
+
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://minhpham852000:Quangminh2000@cluster0.46ara.mongodb.net/test";
