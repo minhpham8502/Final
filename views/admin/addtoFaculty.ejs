@@ -77,9 +77,14 @@
                   <option value="<%= faculity.classID %>" name="classID"><%= faculity.classID %></option>
                   <% }); %>
                   </select>
-                  <input type="submit" value="Add to faculty" class="btn">
+                  <input type="submit" onclick="Function()" value="Add to faculty" class="btn">
               </form> 
           </td>
+          <script>
+            function Function() {
+              alert("Successfully added")
+            }
+            </script>
         </tr>
         <% }); %>
 
@@ -113,9 +118,14 @@
                     <option value="<%= faculity.classID %>" name="classID"><%= faculity.classID %></option>
                     <% }); %>
                     </select>
-                    <input type="submit" value="Add to faculty" class="btn">
+                    <input type="submit" onclick="Function()" value="Add to faculty" class="btn">
                 </form> 
             </td>
+            <script>
+              function Function() {
+                alert("Successfully added")
+              }
+              </script>
           </tr>
           <% }); %>
 

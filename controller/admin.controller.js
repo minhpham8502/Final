@@ -64,7 +64,8 @@ class AdminController {
     }
     doaddtoFaculty(req,res ){
         AccountModel.findOneAndUpdate({_id: req.params.id},{classID: req.body.classID},function(err,result){
-            res.send('<script>alert("Successfully added");window.back();</script>')
+            // res.send('<script>alert("Successfully added");window.back();</script>')
+            res.redirect('/admin/addtoFaculty')
         })
     }
 }
