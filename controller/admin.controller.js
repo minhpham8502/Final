@@ -39,10 +39,14 @@ class AdminController {
             if(err){
                 res.json(err)
             }else{
-                if(role == "coordinator"){
-                    res.redirect("/faculity/Coordinator/" + req.body.classID)      
-                }else if(role == "student"){
-                    res.redirect("/faculity/allStudent/" + req.body.classID)      
+                if(role == "coordinator" && classID !="None"){
+                    res.redirect("/faculity/Coordinator/" + req.body.classID)  
+                }else if(role == "coordinator" && classID ==="None"){
+                    res.redirect('/admin/addtoFaculty')              
+                }else if(role == "student" && classID !="None"){
+                    res.redirect("/faculity/allStudent/" + req.body.classID)
+                }else if(role == "student" && classID ==="None"){
+                    res.redirect('/admin/addtoFaculty')          
                 }else if (role == "guest"){
                     res.redirect("/guest/allGuest")           
                 }else if(role == "manager"){
@@ -54,8 +58,8 @@ class AdminController {
     
 
     addtoFaculty(req,res ){
-        AccountModel.find({classID:"none",role:"student"},function(err,result){
-            AccountModel.find({classID:"none",role:"coordinator"},function(err,result2){
+        AccountModel.find({classID:"None",role:"student"},function(err,result){
+            AccountModel.find({classID:"None",role:"coordinator"},function(err,result2){
                 FaculityModel.find({},function(err,result3){
                     res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculity: result3})
                 })

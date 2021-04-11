@@ -103,8 +103,8 @@ class FaculityController {
         var id = faculty[0]
         console.log(classID)
         console.log(id)
-        AccountModel.updateMany({classID:classID, role:"student"},{classID:"none"},function(err,result){
-            AccountModel.updateMany({classID:classID, role:"coordinator"},{classID:"none"},function(err,result1){
+        AccountModel.updateMany({classID:classID, role:"student"},{classID:"None"},function(err,result){
+            AccountModel.updateMany({classID:classID, role:"coordinator"},{classID:"None"},function(err,result1){
                 FaculityModel.deleteOne({
                     _id : id
                 })
