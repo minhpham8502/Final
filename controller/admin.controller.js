@@ -24,12 +24,12 @@ class AdminController {
         var role = req.body.Role
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
-        let slug = req.body.slug
+        let classID = req.body.classID
         let newAccount = AccountModel({
             username: req.body.username,
             password :hash,
             email: req.body.email,
-            slug: slug,
+            classID: classID,
             role : role,
             phone:req.body.phone,
             birthday:req.body.birthday,
@@ -40,9 +40,9 @@ class AdminController {
                 res.json(err)
             }else{
                 if(role == "coordinator"){
-                    res.redirect("/faculity/Coordinator/" + req.body.slug)      
+                    res.redirect("/faculity/Coordinator/" + req.body.classID)      
                 }else if(role == "student"){
-                    res.redirect("/faculity/allStudent/" + req.body.slug)      
+                    res.redirect("/faculity/allStudent/" + req.body.classID)      
                 }else if (role == "guest"){
                     res.redirect("/guest/allGuest")           
                 }else if(role == "manager"){
@@ -54,8 +54,8 @@ class AdminController {
     
 
     addtoFaculty(req,res ){
-        AccountModel.find({slug:"none",role:"student"},function(err,result){
-            AccountModel.find({slug:"none",role:"coordinator"},function(err,result2){
+        AccountModel.find({classID:"none",role:"student"},function(err,result){
+            AccountModel.find({classID:"none",role:"coordinator"},function(err,result2){
                 FaculityModel.find({},function(err,result3){
                     res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculity: result3})
                 })
@@ -63,7 +63,7 @@ class AdminController {
         })
     }
     doaddtoFaculty(req,res ){
-        AccountModel.findOneAndUpdate({_id: req.params.id},{slug: req.body.slug},function(err,result){
+        AccountModel.findOneAndUpdate({_id: req.params.id},{classID: req.body.classID},function(err,result){
             res.send('<script>alert("Successfully added");window.back();</script>')
         })
     }

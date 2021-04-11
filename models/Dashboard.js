@@ -31,7 +31,7 @@ const DashboardSchema = new Schema({
         default : "0"
     },
 
-    slug: String
+    classID: String
 },
 {
     collection: 'Dashboard'

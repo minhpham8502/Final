@@ -72,9 +72,9 @@
           </td>
           <td>
               <form action="/admin/doaddtoFaculty<%= data2._id %>" method="POST">
-                  <select name="slug">
+                  <select name="classID">
                   <% faculity.forEach(function(faculity) { %>
-                  <option value="<%= faculity.slug %>" name="slug"><%= faculity.slug %></option>
+                  <option value="<%= faculity.classID %>" name="classID"><%= faculity.classID %></option>
                   <% }); %>
                   </select>
                   <input type="submit" value="Add to faculty" class="btn">
@@ -108,9 +108,9 @@
             </td>
             <td>
                 <form action="/admin/doaddtoFaculty<%= data._id %>" method="POST">
-                    <select name="slug">
+                    <select name="classID">
                     <% faculity.forEach(function(faculity) { %>
-                    <option value="<%= faculity.slug %>" name="slug"><%= faculity.slug %></option>
+                    <option value="<%= faculity.classID %>" name="classID"><%= faculity.classID %></option>
                     <% }); %>
                     </select>
                     <input type="submit" value="Add to faculty" class="btn">

@@ -102,7 +102,7 @@ let loginController = function(req,res){
             let user = req.user 
             res.cookie('email',user.email, { maxAge: 90000000, httpOnly: true });
             res.cookie('id',user._id, { maxAge: 90000000, httpOnly: true });
-            res.cookie('slug',user.slug, { maxAge: 90000000, httpOnly: true });
+            res.cookie('classID',user.classID, { maxAge: 90000000, httpOnly: true });
             if(user.role === "admin"){
                 res.redirect("./indexAdmin")
             }

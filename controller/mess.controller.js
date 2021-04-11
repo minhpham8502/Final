@@ -9,14 +9,14 @@ const chatModel = require('../models/chat');
 
 class messtController {
     list(req,res){
-        AccountModel.find({slug: req.params.slug,role: "student"})
+        AccountModel.find({classID: req.params.classID,role: "student"})
         .then((data)=>{
             
             res.render('./message/list_mess',{account : data})
         })
     }
     listCoordinator(req,res){
-        AccountModel.find({slug: req.params.slug,role: "coordinator"})
+        AccountModel.find({classID: req.params.classID,role: "coordinator"})
         .then((data)=>{
             
             res.render('./message/list_coordinator',{account : data})
@@ -91,9 +91,9 @@ class messtController {
                             // find chat
                             dbo.collection("chats").find({userSend:req.params.cookiesemail}).toArray((err,list)=>{
                                 dbo.collection("chats").findOne(query1, (err, result) => {
-                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.slug === user.slug) {
+                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.classID === user.classID) {
                                         // if(cookiesemail=== req.cookies.email){
-                                            console.log(cookiesemail.slug)
+                                            console.log(cookiesemail.classID)
                                             res.render("chat1.ejs", {
                                                 cookiesemail: cookiesemail,
                                                 user: user,
@@ -137,7 +137,7 @@ class messtController {
                             // find chat
                             dbo.collection("chats").find({userSend:req.params.cookiesemail}).toArray((err,list)=>{
                                 dbo.collection("chats").findOne(query1, (err, result) => {
-                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.slug === user.slug) {
+                                    if (result && cookiesemail.email=== req.cookies.email && cookiesemail.classID === user.classID) {
                                         // if(cookiesemail=== req.cookies.email){
                                             res.render("chat1.ejs", {
                                                 cookiesemail: cookiesemail,

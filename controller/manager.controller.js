@@ -43,11 +43,11 @@ class manageController {
 
     //hiển thị tất cả bài viết của khoa đã chọn
     allcontribution(req, res) {
-        let slug = req.params.slug;
-        fileModel.find({slug:slug,status: "Pass"},function(err,result){
+        let classID = req.params.classID;
+        fileModel.find({classID:classID,status: "Pass"},function(err,result){
             if(err){
                 console.log(err) }else{
-                    fileModel.find({slug:slug,status2: "Pass"},function(err,result2){
+                    fileModel.find({classID:classID,status2: "Pass"},function(err,result2){
                         if(err){
                             console.log(err) }else{
                                 res.render('marketingmanager/allcontribution', { data: result,data2: result2 })
@@ -60,9 +60,9 @@ class manageController {
 
 // xem thong ke
 allstatistical = async (req, res) => {
-    AccountModel.find({ slug: req.params.slug, role: "student" })
+    AccountModel.find({ classID: req.params.classID, role: "student" })
         .then(data => {
-            DashboardtModel.findOneAndUpdate({ slug: req.params.slug }, { hocsinhcuakhoa: data.length }, function (err, data) {
+            DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { hocsinhcuakhoa: data.length }, function (err, data) {
                 if (err) {
                     res.json("loivl")
                 }
@@ -71,14 +71,14 @@ allstatistical = async (req, res) => {
             for (var i = 0; i < data.length; i++) {
                 fileModel.aggregate(
                     [ 
-                        { "$match":  { studentemail: data[i].email, slug: req.params.slug } }
+                        { "$match":  { studentemail: data[i].email, classID: req.params.classID } }
                     ],  function(err, results) {
                             if(results.length>0){
                                 cout = cout +1
-                                DashboardtModel.findOneAndUpdate({ slug: req.params.slug }, { soHocsinhnopbai: cout }, function (err, data) {
+                                DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { soHocsinhnopbai: cout }, function (err, data) {
                                 })
                             }else{
-                                DashboardtModel.findOneAndUpdate({ slug: req.params.slug }, { soHocsinhnopbai: cout }, function (err, data) {
+                                DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { soHocsinhnopbai: cout }, function (err, data) {
                                 })
                             } 
                         }
@@ -86,35 +86,35 @@ allstatistical = async (req, res) => {
             }
         })
 
-    fileModel.find({ slug: req.params.slug }, function (data) { })
+    fileModel.find({ classID: req.params.classID }, function (data) { })
         .then(data => {
             let Tongsobaidanop = data.length
-            fileModel.count( {slug: req.params.slug,status: "Pass"}, (err, count) => {
-                fileModel.count( {slug: req.params.slug,status2: "Pass"}, (err, count2) => {
+            fileModel.count( {classID: req.params.classID,status: "Pass"}, (err, count) => {
+                fileModel.count( {classID: req.params.classID,status2: "Pass"}, (err, count2) => {
                     let sobaidapass = count + count2
-                    DashboardtModel.findOneAndUpdate({ slug: req.params.slug }, { tongbaidanop: Tongsobaidanop, sobaidapass: sobaidapass }, function (err, data) {
+                    DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { tongbaidanop: Tongsobaidanop, sobaidapass: sobaidapass }, function (err, data) {
                     })   
                 });
 
             });
         })
-        fileModel.find({ slug: req.params.slug }, function (data) { })
+        fileModel.find({ classID: req.params.classID }, function (data) { })
         .then(data => {
-            fileModel.count( {slug: req.params.slug,status: "Fail"}, (err, count) => {
-                fileModel.count( {slug: req.params.slug,status2: "Fail"}, (err, count2) => {
+            fileModel.count( {classID: req.params.classID,status: "Fail"}, (err, count) => {
+                fileModel.count( {classID: req.params.classID,status2: "Fail"}, (err, count2) => {
                     let sobaidafail = count + count2
-                    DashboardtModel.findOneAndUpdate({ slug: req.params.slug }, { fail: sobaidafail }, function (err, data) {
+                    DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { fail: sobaidafail }, function (err, data) {
                     })   
                 });
 
             });
         }) 
 
-        res.redirect("Statistical" + req.params.slug )
+        res.redirect("Statistical" + req.params.classID )
     
 }
 statistical(req, res) {
-    DashboardtModel.find({ slug: req.params.slug }, function (err, data) {
+    DashboardtModel.find({ classID: req.params.classID }, function (err, data) {
         res.render('marketingmanager/thongke', { data: data })
     })
 }

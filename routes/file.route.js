@@ -128,7 +128,7 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                     filePath:filePath,
                     nameFile : x,
                     studentemail: email,
-                    slug: req.cookies.slug,
+                    classID: req.cookies.classID,
                 })
                 temp.save((err,data)=>{
                     let email = req.cookies.email
@@ -141,10 +141,10 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                     }
                     transporter.sendMail(mainOptions, function(err, info){
                     });
-                    let slug = req.cookies.slug
+                    let classID = req.cookies.classID
                     AccountModel.findOne({
                         role: "coordinator",
-                        slug: slug
+                        classID: classID
                     },function(err, result){
                         var content = email + 'just uploaded an article to the system. Name: ' + x;
                         var mainOptions2 = {
@@ -192,7 +192,7 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                             filePath:filePath,
                             nameFile : y,
                             studentemail: email,
-                            slug: req.cookies.slug,
+                            classID: req.cookies.classID,
                             filePathAnh:imgpath,
                         })
                         temp.save((err,data)=>{
@@ -206,10 +206,10 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                             }
                             transporter.sendMail(mainOptions, function(err, info){                     
                             });
-                            let slug = req.cookies.slug
+                            let classID = req.cookies.classID
                             AccountModel.findOne({
                                 role: "coordinator",
-                                slug: slug
+                                classID: classID
                             },function(err, result){
                                 var content = email + 'just uploaded an article to the system. Name: ' + x;
                                 var mainOptions2 = { 
@@ -282,10 +282,10 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
                                     console.log(err);
                                 } 
                             });
-                            let slug = req.cookies.slug
+                            let classID = req.cookies.classID
                             AccountModel.findOne({
                                 role: "coordinator",
-                                slug: slug
+                                classID: classID
                             },function(err, result){
                                 var content = email + 'just uploaded an article to the system. Name: ' + x;
                                 var mainOptions2 = { 
@@ -357,10 +357,10 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
                         //bắt đầu gửi mail
                         transporter.sendMail(mainOptions, function(err, info){
                         });
-                        let slug = req.cookies.slug
+                        let classID = req.cookies.classID
                         AccountModel.findOne({
                             role: "coordinator",
-                            slug: slug
+                            classID: classID
                         },function(err, result){
                             var content = email + 'just uploaded an article to the system. Name: ' + x;
                             var mainOptions2 = { 
@@ -384,9 +384,9 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
 }   
 })
 //download zip
-fileRouter.get('/lol:slug',(req,res)=>{
-    slug = req.params.slug
-    fileModel.find({slug:slug},(err,data)=>{
+fileRouter.get('/lol:classID',(req,res)=>{
+    classID = req.params.classID
+    fileModel.find({classID:classID},(err,data)=>{
         res.render('marketingmanager/selectfiletodownload.ejs',{data:data})
     })
 })
@@ -395,7 +395,7 @@ fileRouter.get('/lol:slug',(req,res)=>{
 var file_system = require('fs');
 var archiver = require('archiver');
 fileRouter.post('/abc',(req,res)=>{
-    var output = file_system.createWriteStream('public/nameslug.zip');
+    var output = file_system.createWriteStream('public/nameclassID.zip');
     var archive = archiver('zip');
     var a = req.body.hobby
     output.on('close', function () {
@@ -413,7 +413,7 @@ fileRouter.post('/abc',(req,res)=>{
 })
 
 fileRouter.get('/abc1',(req,res)=>{
-            var x = __dirname.replace('routes','public/') + 'nameslug.zip'
+            var x = __dirname.replace('routes','public/') + 'nameclassID.zip'
             res.download(x)
         }
 )

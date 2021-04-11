@@ -15,9 +15,9 @@ manageRoute.post('/settime', manageController.settime)
 
 //xem bài báo
 manageRoute.get('/allfaculity', manageController.allfaculity)
-manageRoute.get('/allcontribution:slug', manageController.allcontribution)
-manageRoute.get('/viewStatistical:slug', manageController.allstatistical)
-manageRoute.get('/Statistical:slug', manageController.statistical)
+manageRoute.get('/allcontribution:classID', manageController.allcontribution)
+manageRoute.get('/viewStatistical:classID', manageController.allstatistical)
+manageRoute.get('/Statistical:classID', manageController.statistical)
 
 
 manageRoute.get('/readcontribution:id', manageController.readcontribution)

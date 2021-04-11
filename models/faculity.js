@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var slug = require('mongoose-slug-generator');
+var classID = require('mongoose-classID-generator');
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://minhpham852000:Quangminh2000@cluster0.46ara.mongodb.net/test";
@@ -13,7 +13,7 @@ mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 const FaculitySchema = new Schema({ 
     faculityname : String,
-    slug: String,
+    classID: String,
     deadline:String,
     deadline2:String,
   

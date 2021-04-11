@@ -17,12 +17,12 @@ let update =(req,res)=>{
 }
 let deleteCoordinator = (req,res)=>{
     AccountModel.findById({_id:req.params.id},function(err,data){
-        let slug = data.slug
+        let classID = data.classID
         AccountModel.deleteOne({
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/faculity/Coordinator/'+ slug)
+            res.redirect('/faculity/Coordinator/'+ classID)
         })
     })
     
@@ -34,7 +34,7 @@ let doupdate =(req,res)=>{
         _id : req.params.id
     }, req.body)
     .then(()=>{
-        res.redirect('/faculity/Coordinator/'+ req.body.slug)
+        res.redirect('/faculity/Coordinator/'+ req.body.classID)
     })
 }
 
