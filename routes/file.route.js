@@ -374,7 +374,10 @@ fileRouter.get('/lol:classID',(req,res)=>{
 var file_system = require('fs');
 var archiver = require('archiver');
 fileRouter.post('/abc',(req,res)=>{
-    var output = file_system.createWriteStream('public/nameclassID.zip');
+    var classID = "public/"+  req.body.classID + ".zip"
+    var name = req.body.classID + ".zip"
+    console.log("ssssssssssssss:",name)
+    var output = file_system.createWriteStream(classID);
     var archive = archiver('zip');
     var a = req.body.hobby
     output.on('close', function () {
@@ -390,11 +393,12 @@ fileRouter.post('/abc',(req,res)=>{
             archive.append(file_system.createReadStream(file), { name: file })
         }
     archive.finalize();   
-        res.redirect('./abc1')
+        res.redirect('./abc1/'+ name)
 })
 
-fileRouter.get('/abc1',(req,res)=>{
-            var x = __dirname.replace('routes','public/') + 'nameclassID.zip'
+fileRouter.get('/abc1/:name',(req,res)=>{
+            var name = req.params.name
+            var x = __dirname.replace('routes','public/') + name
             res.download(x)
         }
 )

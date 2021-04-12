@@ -50,7 +50,7 @@ class manageController {
                     fileModel.find({classID:classID,status2: "Pass"},function(err,result2){
                         if(err){
                             console.log(err) }else{
-                                res.render('marketingmanager/allcontribution', { data: result,data2: result2 })
+                                res.render('marketingmanager/allcontribution', { data: result,data2: result2, classID:classID })
                             }
                     })          
             }
