@@ -68,19 +68,30 @@
                 <option value="coordinator">Marketing Coordinator</option>
                 <option value="manager">Marketing Manager</option>
           </select>     
+
 </div><br>
   <div class="form-group">
  <label for="topic">CLass</label>
 
 
-            <select name="slug">
+            <select name="classID">
               {{#each faculity}}
-              <option value="{{slug}}" name="slug">{{slug}}</option>
+              <option value="{{classID}}" name="classID">{{classID}}</option>
               {{/each}}
-              <option value="None" name="slug">None</option>
+              <option value="None" name="classID">None</option>
 
             </select>
-</div><br>
+
+ 
+
+</div>
+
+
+<div class="form-group">
+   <label for="topic" style = " color: red " >{{message}}</label><br>
+</div>
+
+<br>
   <div class="form-group">
           <label for="topic">Birthday</label>
           

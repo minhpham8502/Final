@@ -25,6 +25,7 @@ class AdminController {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         let classID = req.body.classID
+
         let newAccount = AccountModel({
             username: req.body.username,
             password :hash,
@@ -37,21 +38,39 @@ class AdminController {
         })
         newAccount.save(function(err,data){
             if(err){
-                res.json(err)
+                console.log(err)
             }else{
-                if(role == "coordinator" && classID !="None"){
-                    res.redirect("/faculity/Coordinator/" + req.body.classID)  
-                }else if(role == "coordinator" && classID ==="None"){
-                    res.redirect('/admin/addtoFaculty')              
-                }else if(role == "student" && classID !="None"){
-                    res.redirect("/faculity/allStudent/" + req.body.classID)
-                }else if(role == "student" && classID ==="None"){
-                    res.redirect('/admin/addtoFaculty')          
-                }else if (role == "guest"){
-                    res.redirect("/guest/allGuest")           
-                }else if(role == "manager"){
-                    res.redirect("/manage/allManager")           
-                }
+                FaculityModel.find({},function(data){})
+                .then(data=>{
+                    if(role == "coordinator" && classID !="None"){
+                        res.redirect("/faculity/Coordinator/" + req.body.classID)  
+                    }else if(role == "coordinator" && classID ==="None"){
+                        res.redirect('/admin/addtoFaculty')              
+                    }else if(role == "student" && classID !="None"){
+                        res.redirect("/faculity/allStudent/" + req.body.classID)
+                    }else if(role == "student" && classID !="None"){
+                        res.redirect('/admin/addtoFaculty')     
+
+                    }else if (role == "guest" && classID != "None"){
+                       var message= role + " cannot add classes"
+                       AccountModel.deleteOne({_id: newAccount._id})
+                       .then(()=>{
+                        res.render("admin/createAccount", {faculity:data,message: message}) 
+                       })
+
+                    }else if (role == "guest" && classID === "None" ){
+                        res.redirect("/guest/allGuest")  
+
+                    }else if(role == "manager" && classID === "None"){
+                        res.redirect("/manage/allManager")
+                    }else if (role == "manager" && classID != "None"){
+                        var message= role + " cannot add classes"
+                        AccountModel.deleteOne({_id: newAccount._id})
+                        .then(()=>{
+                         res.render("admin/createAccount", {faculity:data,message: message}) 
+                        })           
+                    }
+                })
             }
         })
     }
