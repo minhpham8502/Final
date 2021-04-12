@@ -110,7 +110,7 @@ class messtController {
                                         // }
                                     } 
                                     else{
-                                        res.json('err')
+                                        res.redirect('/error')
                                     }
                                 });
                             });
@@ -155,7 +155,7 @@ class messtController {
                                         // }
                                     } 
                                     else{
-                                        res.json('err')
+                                        res.redirect('/error')
                                     }
                                 });
                             });

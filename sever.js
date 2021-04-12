@@ -40,7 +40,9 @@ var guestRoutes = require('./routes/guest.route')
 var manageRoutes = require('./routes/manage.route')
 var messRoutes = require('./routes/mess.route')
 
-
+app.get('/error', (req,res)=>{
+    res.render('errorhandle.hbs')
+})
 
 app.use('/guest', guestRoutes);
 app.use('/admin', adminRoute);
