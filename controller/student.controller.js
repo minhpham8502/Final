@@ -23,12 +23,12 @@ let update =(req,res)=>{
 }
 let deleteStudent = (req,res)=>{
     AccountModel.findById({_id:req.params.id},function(err,data){
-        let classID = data.classID
+        let facultyID = data.facultyID
         AccountModel.deleteOne({
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/faculity/allStudent/'+ classID)
+            res.redirect('/faculity/allStudent/'+ facultyID)
         })
     })
     
@@ -39,7 +39,7 @@ let doupdate =(req,res)=>{
         _id : req.params.id
     }, req.body)
     .then(()=>{
-        res.redirect('/faculity/allStudent/'+ req.body.classID)
+        res.redirect('/faculity/allStudent/'+ req.body.facultyID)
     })
 }
 

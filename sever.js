@@ -20,7 +20,7 @@ app.use(cookieParser())
 app.get('/logout', function (req, res, next) {
     res.clearCookie("token");
     res.clearCookie("id");
-    res.clearCookie("classID");
+    res.clearCookie("facultyID");
     res.clearCookie("email");
     res.clearCookie("deadline");
     res.clearCookie("_cfduid");

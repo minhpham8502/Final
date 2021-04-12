@@ -55,7 +55,8 @@
 
           <tr>
             <th scope="col" style="font-size:20px;">File summitted:</th>
-            <th>Evaluate</th>
+            <th>Poster</th>
+            <th>Status</th>
           </tr>
 
           <% data.forEach(function(data) { %>
@@ -65,7 +66,9 @@
                   <a href="/download/<%= data._id %>">
                     <%= data.nameFile %>
                   </a>
-                  <img width="40px" height="40px" src="<%= data.filePathAnh %>" alt="photo for report"/>
+                </td>
+                <td>
+                  <img width="100px" height="100px" src="<%= data.filePathAnh %>" alt="photo for report"/>
                 </td>
                 <td>
                   <%= data.status %>
@@ -77,29 +80,20 @@
               <% data.forEach(function(data) { %>
                 <tr>
                   <%if (!data.filePathAnh) { %>
-                    <td><a href="/download/<%= data._id %>">
+                    <td>
+                      <a href="/download/<%= data._id %>">
                         <%= data.nameFile %>
-                      </a></td>
+                      </a>
+                    </td>
+                    <td>
+                      No Poster
+                    </td>
                     <td>
                       <%= data.status %>
                     </td>
                     <% } %>
                 </tr>
                 <% }); %>
-
-
-
-                  <!-- {{#each data}}
-    
-    <tbody>
-        <tr>
-        <th>
-            <a>
-              <img width="50px" height="20px" src="{{filePathAnh}}"/>
-            </a>
-        </th>
-        </tr>
-        {{/each}} -->
         </table>
 
       </div>

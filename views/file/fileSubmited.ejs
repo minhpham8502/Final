@@ -38,16 +38,20 @@
 
             </div>
             <div class="content">
-              <h1>File submitted:</h1>
+              <h1>File submitted</h1>
               <p style="color:red;">Deadline for edit:</p> 
               <p id = "del" style="color:red;"><%= a %></p>
               <p style="color:red;">(yy-mm-dd hh:mm)</p>
               <p id = "del1" style="display: none"><%= b %></p>
-              <h1> Reports Passed 1st deadline</h1>
+             
+              <h1> The article has been graded without editing</h1>
+               
+
               <table class="table">
                 
               <tr>
                   <th>First submit</th>
+                  <th>Poster</th>
                   <th>Status</th>
                   <th>Comment</th>
                   <th>Update</th>
@@ -58,11 +62,12 @@
                     <%if (data.status =="Pass") { %>
                     <td>                        
                       <a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                    </td>
+                    <td>
                       <%if (data.filePathAnh) { %>
-                        <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
+                        <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
                       <% }  %> 
                     </td>
-                    
                     <td><%= data.status %></td>
                     <td><%= data.comment %></td>
                     <td><p>Can't update file</p></td>
@@ -75,11 +80,12 @@
                     <%if (data.status =="Fail") { %>
                     <td>                        
                       <a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                    </td>
+                    <td>
                       <%if (data.filePathAnh) { %>
-                        <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
+                        <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
                       <% }  %> 
                     </td>
-                    
                     <td><%= data.status %></td>
                     <td><%= data.comment %></td>
                     <td><p>Can't update file</p></td>
@@ -87,11 +93,13 @@
                 </tr>
               <% }); %>
               </table>  
+            
+
               <h1>  Update file </h1>
               <table class="table">
                 <tr>
                     <th>First submit</th>
-                    <!-- <th>Status</th> -->
+                    <th>Poster</th>
                     <th>Update edition</th>
                     <th>Satus</th>
                     <th>Comment</th>
@@ -100,15 +108,17 @@
                 <% data.forEach(function(data) { %>
                   <tr>
                       <%if (data.status =="not rate" && data.nameFile2 && data.status2 =="Pass") { %>
-                      <td><a href="/download/<%= data._id %>"><%= data.nameFile %></a> 
+                      <td>
+                        <a href="/download/<%= data._id %>"><%= data.nameFile %></a> 
+                      </td>
+                      <td>
                         <%if (data.filePathAnh) { %>
-                          <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
+                          <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
                         <% }  %>  
                       </td>
-                      <!-- <td><%= data.status %></td> -->
                       <td><a href="/download2/<%= data._id %>"><%= data.nameFile2 %> 
                         <%if (data.filePathAnh2) { %>
-                          <img src="/<%= data.filePathAnh2 %>" width="40px" height="40px"/>
+                          <img src="/<%= data.filePathAnh2 %>" width="100px" height="100px"/>
                         <% }  %>  
                       </td>
                       <td><%= data.status2 %></td>
@@ -120,14 +130,17 @@
                 <% data.forEach(function(data) { %>
                   <tr>
                       <%if (data.status =="not rate" && data.nameFile2 && data.status2 =="Fail") { %>
-                      <td><a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                      <td>
+                        <a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                      </td>
+                      <td>
                         <%if (data.filePathAnh) { %>
-                          <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
-                        <% }  %>                        </td>
-                      <!-- <td><%= data.status %></td> -->
+                          <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
+                        <% }  %>  
+                      </td>
                       <td><a href="/download2/<%= data._id %>"><%= data.nameFile2 %>   
                         <%if (data.filePathAnh2) { %>
-                          <img src="/<%= data.filePathAnh2 %>" width="40px" height="40px"alt="photo for report"/>
+                          <img src="/<%= data.filePathAnh2 %>" width="100px" height="100px"alt="photo for report"/>
                         <% }  %>                        </td>
                       <td><%= data.status2 %></td>
                       <td><%= data.comment2 %></td>
@@ -139,14 +152,17 @@
                 <% data.forEach(function(data) { %>
                   <tr>
                       <%if (data.status =="not rate" && data.nameFile2 && data.status2 =="not rate") { %>
-                      <td><a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                      <td>
+                        <a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                      </td>
+                      <td>
                         <%if (data.filePathAnh) { %>
-                          <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
-                        <% }  %>                        </td>
-                      <!-- <td><%= data.status %></td> -->
-                      <td><a href="/download2/<%= data._id %>"><%= data.nameFile2 %>   
+                          <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
+                        <% }  %>     
+                      </td>
+                     <td><a href="/download2/<%= data._id %>"><%= data.nameFile2 %>   
                         <%if (data.filePathAnh2) { %>
-                          <img src="/<%= data.filePathAnh2 %>" width="40px" height="40px"/>
+                          <img src="/<%= data.filePathAnh2 %>" width="100px" height="100px"/>
                         <% }  %>                        </td>
                       <td><%= data.status2 %></td>
                       <td><%= data.comment2 %></td>
@@ -166,15 +182,18 @@
                 <% data.forEach(function(data) { %>
                   <tr>
                       <%if (data.status =="not rate" &&! data.nameFile2) { %>
-                        <td><a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                        <td>
+                          <a href="/download/<%= data._id %>"><%= data.nameFile %></a>
+                        </td>
+                        <td>
                           <%if (data.filePathAnh) { %>
-                            <img src="/<%= data.filePathAnh %>" width="40px" height="40px"alt="photo for report"/>
+                            <img src="/<%= data.filePathAnh %>" width="100px" height="100px"alt="photo for report"/>
                           <% }  %>  
                         </td>
                         <!-- <td><%= data.status %></td> -->
                         <td><a href="/download2/<%= data._id %>"><%= data.nameFile2 %>
                           <%if (data.filePathAnh2) { %>
-                            <img src="/<%= data.filePathAnh2 %>" width="40px" height="40px"alt="photo for report"/>
+                            <img src="/<%= data.filePathAnh2 %>" width="100px" height="100px"alt="photo for report"/>
                           <% }  %>  
                         </td>
                       <!-- <td><%= data.status2 %></td> -->

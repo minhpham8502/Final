@@ -10,11 +10,11 @@ class guestController {
     
     //last piece
     allcontribution(req,res){
-        let classID = req.params.classID;
-        fileModel.find({classID:classID,status: "Pass"},function(err,result){
+        let facultyID = req.params.facultyID;
+        fileModel.find({facultyID:facultyID,status: "Pass"},function(err,result){
             if(err){
                 console.log(err) }else{
-                    fileModel.find({classID:classID,status2: "Pass"},function(err,result2){
+                    fileModel.find({facultyID:facultyID,status2: "Pass"},function(err,result2){
                         if(err){
                             console.log(err) }else{
                             res.render('guest/baocuahocsinh',{data:result,data2:result2})

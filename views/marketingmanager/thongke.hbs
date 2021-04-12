@@ -45,9 +45,7 @@
         <ul>
           <li><a href="/account/indexManager">Home</a></li>
           <li><a href="/manage/allfaculity">All faculty</a></li>
-          <li id="popupsettime">Set Time</li>
         </ul>
-
       </div>
       <div class="content">
 
@@ -60,11 +58,6 @@
             <div id="piechart2">
             <script type="text/javascript2" src="https://www.gstatic.com/charts/loader.js"></script>   
             </div>       
-
-
-
-
-
 
 <script type="text/javascript">
 // Load google charts
@@ -121,78 +114,6 @@ function drawChart() {
       </div>
     </div>
   </div>
-
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p> Set deadlines for all students</p>
-      <input type="date" name="date" id="date">
-      <input type="time" name="time" id="time"><br>
-      <input type="submit" id="btnUpdate2" value="Submit">
-    </div>
-
-  </div>
-
-  <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("popupsettime");
-    var btn2 = document.getElementById("btnUpdate2");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function () {
-      modal.style.display = "block";
-    }
-    btn2.onclick = function () {
-      $.ajax({
-        url: "/manage/settime",
-        method: "post",
-        data: {
-          date: $("#date").val(),
-          time: $("#time").val(),
-        },
-        cache: false,
-        success: function (data) {
-          // data is the object that you send form the server by 
-          // res.jsonp();
-          // here data = {success : true}
-          // validate it
-          if (data['success']) {
-            alert("Settime success");
-          }
-        },
-        error: function () {
-          // some error handling part
-          alert("Oops! Something went wrong.");
-        }
-      });
-      modal.style.display = "none";
-    }
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.style.display = "none";
-    }
-
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
 
   <div class="footer">
     <p>@University-2021</p>

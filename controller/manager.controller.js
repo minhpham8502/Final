@@ -43,14 +43,14 @@ class manageController {
 
     //hiển thị tất cả bài viết của khoa đã chọn
     allcontribution(req, res) {
-        let classID = req.params.classID;
-        fileModel.find({classID:classID,status: "Pass"},function(err,result){
+        let facultyID = req.params.facultyID;
+        fileModel.find({facultyID:facultyID,status: "Pass"},function(err,result){
             if(err){
                 console.log(err) }else{
-                    fileModel.find({classID:classID,status2: "Pass"},function(err,result2){
+                    fileModel.find({facultyID:facultyID,status2: "Pass"},function(err,result2){
                         if(err){
                             console.log(err) }else{
-                                res.render('marketingmanager/allcontribution', { data: result,data2: result2, classID:classID })
+                                res.render('marketingmanager/allcontribution', { data: result,data2: result2, facultyID:facultyID })
                             }
                     })          
             }
@@ -60,9 +60,9 @@ class manageController {
 
 // xem thong ke
 allstatistical = async (req, res) => {
-    AccountModel.find({ classID: req.params.classID, role: "student" })
+    AccountModel.find({ facultyID: req.params.facultyID, role: "student" })
         .then(data => {
-            DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { hocsinhcuakhoa: data.length }, function (err, data) {
+            DashboardtModel.findOneAndUpdate({ facultyID: req.params.facultyID }, { hocsinhcuakhoa: data.length }, function (err, data) {
                 if (err) {
                     res.json("loivl")
                 }
@@ -71,14 +71,14 @@ allstatistical = async (req, res) => {
             for (var i = 0; i < data.length; i++) {
                 fileModel.aggregate(
                     [ 
-                        { "$match":  { studentemail: data[i].email, classID: req.params.classID } }
+                        { "$match":  { studentemail: data[i].email, facultyID: req.params.facultyID } }
                     ],  function(err, results) {
                             if(results.length>0){
                                 cout = cout +1
-                                DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { soHocsinhnopbai: cout }, function (err, data) {
+                                DashboardtModel.findOneAndUpdate({ facultyID: req.params.facultyID }, { soHocsinhnopbai: cout }, function (err, data) {
                                 })
                             }else{
-                                DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { soHocsinhnopbai: cout }, function (err, data) {
+                                DashboardtModel.findOneAndUpdate({ facultyID: req.params.facultyID }, { soHocsinhnopbai: cout }, function (err, data) {
                                 })
                             } 
                         }
@@ -86,35 +86,35 @@ allstatistical = async (req, res) => {
             }
         })
 
-    fileModel.find({ classID: req.params.classID }, function (data) { })
+    fileModel.find({ facultyID: req.params.facultyID }, function (data) { })
         .then(data => {
             let Tongsobaidanop = data.length
-            fileModel.count( {classID: req.params.classID,status: "Pass"}, (err, count) => {
-                fileModel.count( {classID: req.params.classID,status2: "Pass"}, (err, count2) => {
+            fileModel.count( {facultyID: req.params.facultyID,status: "Pass"}, (err, count) => {
+                fileModel.count( {facultyID: req.params.facultyID,status2: "Pass"}, (err, count2) => {
                     let sobaidapass = count + count2
-                    DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { tongbaidanop: Tongsobaidanop, sobaidapass: sobaidapass }, function (err, data) {
+                    DashboardtModel.findOneAndUpdate({ facultyID: req.params.facultyID }, { tongbaidanop: Tongsobaidanop, sobaidapass: sobaidapass }, function (err, data) {
                     })   
                 });
 
             });
         })
-        fileModel.find({ classID: req.params.classID }, function (data) { })
+        fileModel.find({ facultyID: req.params.facultyID }, function (data) { })
         .then(data => {
-            fileModel.count( {classID: req.params.classID,status: "Fail"}, (err, count) => {
-                fileModel.count( {classID: req.params.classID,status2: "Fail"}, (err, count2) => {
+            fileModel.count( {facultyID: req.params.facultyID,status: "Fail"}, (err, count) => {
+                fileModel.count( {facultyID: req.params.facultyID,status2: "Fail"}, (err, count2) => {
                     let sobaidafail = count + count2
-                    DashboardtModel.findOneAndUpdate({ classID: req.params.classID }, { fail: sobaidafail }, function (err, data) {
+                    DashboardtModel.findOneAndUpdate({ facultyID: req.params.facultyID }, { fail: sobaidafail }, function (err, data) {
                     })   
                 });
 
             });
         }) 
 
-        res.redirect("Statistical" + req.params.classID )
+        res.redirect("Statistical" + req.params.facultyID )
     
 }
 statistical(req, res) {
-    DashboardtModel.find({ classID: req.params.classID }, function (err, data) {
+    DashboardtModel.find({ facultyID: req.params.facultyID }, function (err, data) {
         res.render('marketingmanager/thongke', { data: data })
     })
 }

@@ -117,7 +117,7 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                 filePath:filePath,
                 nameFile : x,
                 studentemail: email,
-                classID: req.cookies.classID,
+                facultyID: req.cookies.facultyID,
             })
             temp.save((err,data)=>{
                 if(err){
@@ -136,10 +136,10 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                         console.log(err);
                     } 
                 });
-                let classID = req.cookies.classID
+                let facultyID = req.cookies.facultyID
                 AccountModel.findOne({
                     role: "coordinator",
-                    classID: classID
+                    facultyID: facultyID
                 },function(err, result){
                     var content = email + 'just uploaded an article to the system. Name: ' + x;
                     var mainOptions2 = {
@@ -187,7 +187,7 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                 filePath:filePath,
                 nameFile : y,
                 studentemail: email,
-                classID: req.cookies.classID,
+                facultyID: req.cookies.facultyID,
                 filePathAnh:imgpath,
             })
             temp.save((err,data)=>{
@@ -207,10 +207,10 @@ fileRouter.post('/upload',upload.array('filePath',2),(req,res)=>{
                         console.log(err);
                     } 
                 });
-                let classID = req.cookies.classID
+                let facultyID = req.cookies.facultyID
                 AccountModel.findOne({
                     role: "coordinator",
-                    classID: classID
+                    facultyID: facultyID
                 },function(err, result){
                     var content = email + 'just uploaded an article to the system. Name: ' + x;
                     var mainOptions2 = { 
@@ -270,10 +270,10 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
                             console.log(err);
                         } 
                     });
-                    let classID = req.cookies.classID
+                    let facultyID = req.cookies.facultyID
                         AccountModel.findOne({
                             role: "coordinator",
-                            classID: classID
+                            facultyID: facultyID
                         },function(err, result){
                             var content = email + 'just uploaded an article to the system. Name: ' + x;
                             var mainOptions2 = { 
@@ -336,10 +336,10 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
                         console.log(err);
                     } 
                 });
-                let classID = req.cookies.classID
+                let facultyID = req.cookies.facultyID
                 AccountModel.findOne({
                     role: "coordinator",
-                    classID: classID
+                    facultyID: facultyID
                 },function(err, result){
                     var content = email + 'just uploaded an article to the system. Name: ' + x;
                     var mainOptions2 = { 
@@ -363,9 +363,9 @@ fileRouter.post('/upload2',upload.array('filePath',2),(req,res)=>{
 })
 
 //download zip
-fileRouter.get('/lol:classID',(req,res)=>{
-    classID = req.params.classID
-    fileModel.find({classID:classID},(err,data)=>{
+fileRouter.get('/lol:facultyID',(req,res)=>{
+    facultyID = req.params.facultyID
+    fileModel.find({facultyID:facultyID},(err,data)=>{
         res.render('marketingmanager/selectfiletodownload.ejs',{data:data})
     })
 })
@@ -374,10 +374,10 @@ fileRouter.get('/lol:classID',(req,res)=>{
 var file_system = require('fs');
 var archiver = require('archiver');
 fileRouter.post('/abc',(req,res)=>{
-    var classID = "public/"+  req.body.classID + ".zip"
-    var name = req.body.classID + ".zip"
+    var facultyID = "public/"+  req.body.facultyID + ".zip"
+    var name = req.body.facultyID + ".zip"
     console.log("ssssssssssssss:",name)
-    var output = file_system.createWriteStream(classID);
+    var output = file_system.createWriteStream(facultyID);
     var archive = archiver('zip');
     var a = req.body.hobby
     output.on('close', function () {

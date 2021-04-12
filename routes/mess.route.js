@@ -6,8 +6,8 @@ const { isEmail } = require('../middleware/index');
 const messController = require('../controller/mess.controller');
 const add_chat = require('../controller/add_chat');
 
-messRoute.get('/:classID', messController.list)
-messRoute.get('/coordinator/:classID', messController.listCoordinator)
+messRoute.get('/:facultyID', messController.list)
+messRoute.get('/coordinator/:facultyID', messController.listCoordinator)
 
 messRoute.get('/all/:email', messController.detailCoordinator)
 messRoute.get('/allStudent/:email', messController.detailStudent)

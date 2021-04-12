@@ -24,13 +24,13 @@ class AdminController {
         var role = req.body.Role
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
-        let classID = req.body.classID
+        let facultyID = req.body.facultyID
 
         let newAccount = AccountModel({
             username: req.body.username,
             password :hash,
             email: req.body.email,
-            classID: classID,
+            facultyID: facultyID,
             role : role,
             phone:req.body.phone,
             birthday:req.body.birthday,
@@ -42,28 +42,28 @@ class AdminController {
             }else{
                 FaculityModel.find({},function(data){})
                 .then(data=>{
-                    if(role == "coordinator" && classID !="None"){
-                        res.redirect("/faculity/Coordinator/" + req.body.classID)  
-                    }else if(role == "coordinator" && classID ==="None"){
+                    if(role == "coordinator" && facultyID !="None"){
+                        res.redirect("/faculity/Coordinator/" + req.body.facultyID)  
+                    }else if(role == "coordinator" && facultyID ==="None"){
                         res.redirect('/admin/addtoFaculty')              
-                    }else if(role == "student" && classID !="None"){
-                        res.redirect("/faculity/allStudent/" + req.body.classID)
-                    }else if(role == "student" && classID !="None"){
+                    }else if(role == "student" && facultyID !="None"){
+                        res.redirect("/faculity/allStudent/" + req.body.facultyID)
+                    }else if(role == "student" && facultyID !="None"){
                         res.redirect('/admin/addtoFaculty')     
 
-                    }else if (role == "guest" && classID != "None"){
-                       var message= role + " cannot add classes"
-                       AccountModel.deleteOne({_id: newAccount._id})
-                       .then(()=>{
-                        res.render("admin/createAccount", {faculity:data,message: message}) 
-                       })
+                    // }else if (role == "guest" && facultyID != "None"){
+                    //    var message= role + " cannot add classes"
+                    //    AccountModel.deleteOne({_id: newAccount._id})
+                    //    .then(()=>{
+                    //     res.render("admin/createAccount", {faculity:data,message: message}) 
+                    //    })
 
-                    }else if (role == "guest" && classID === "None" ){
+                    }else if (role == "guest" ){
                         res.redirect("/guest/allGuest")  
 
-                    }else if(role == "manager" && classID === "None"){
+                    }else if(role == "manager" && facultyID === "None"){
                         res.redirect("/manage/allManager")
-                    }else if (role == "manager" && classID != "None"){
+                    }else if (role == "manager" && facultyID != "None"){
                         var message= role + " cannot add classes"
                         AccountModel.deleteOne({_id: newAccount._id})
                         .then(()=>{
@@ -77,8 +77,8 @@ class AdminController {
     
 
     addtoFaculty(req,res ){
-        AccountModel.find({classID:"None",role:"student"},function(err,result){
-            AccountModel.find({classID:"None",role:"coordinator"},function(err,result2){
+        AccountModel.find({facultyID:"None",role:"student"},function(err,result){
+            AccountModel.find({facultyID:"None",role:"coordinator"},function(err,result2){
                 FaculityModel.find({},function(err,result3){
                     res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculity: result3})
                 })
@@ -86,7 +86,7 @@ class AdminController {
         })
     }
     doaddtoFaculty(req,res ){
-        AccountModel.findOneAndUpdate({_id: req.params.id},{classID: req.body.classID},function(err,result){
+        AccountModel.findOneAndUpdate({_id: req.params.id},{facultyID: req.body.facultyID},function(err,result){
             // res.send('<script>alert("Successfully added");window.back();</script>')
             res.redirect('/admin/addtoFaculty')
         })

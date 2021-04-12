@@ -10,13 +10,13 @@ faculityRoute.use(checkAuth);
 
 // tương tác với faculity
 faculityRoute.get('/allfaculity', faculityController.allfaculity)
-faculityRoute.get('/faculity/:classID', faculityController.detail)
+faculityRoute.get('/faculity/:facultyID', faculityController.detail)
 
 faculityRoute.post('/faculity/search', faculityController.search)
-faculityRoute.get('/allStudent/:classID/',faculityController.allstudent,)
-faculityRoute.get('/Coordinator/:classID',faculityController.coordinator)
+faculityRoute.get('/allStudent/:facultyID/',faculityController.allstudent,)
+faculityRoute.get('/Coordinator/:facultyID',faculityController.coordinator)
 
-faculityRoute.get('/view:classID', checkCoordinator,faculityController.viewmanagine)
+faculityRoute.get('/view:facultyID', checkCoordinator,faculityController.viewmanagine)
 faculityRoute.get('/evaluate/:id', checkCoordinator,faculityController.danhgiabaibao)
 faculityRoute.get('/allDocument/:email',checkCoordinator ,faculityController.allDocument)
 

@@ -14,10 +14,10 @@ class FaculityController {
     }
 
     detail(req,res){
-        let classID = req.params.classID;
+        let facultyID = req.params.facultyID;
 
         FaculityModel.find({
-            classID : classID
+            facultyID : facultyID
         })
         .then(data=>{
             console.log(data)
@@ -66,7 +66,7 @@ class FaculityController {
         var newFaculity = FaculityModel({
             faculityname : faculitynme,
             topic : req.body.topic,
-            classID: req.body.classID,
+            facultyID: req.body.facultyID,
 
             student: []
         })
@@ -76,7 +76,7 @@ class FaculityController {
                 console.log(err)
             }else{
                 var newDashboard = DashboardtModel({
-                    classID:req.body.classID
+                    facultyID:req.body.facultyID
                 })
                 newDashboard.save(function(err){
                     res.redirect('/faculity/allfaculity')
@@ -99,12 +99,12 @@ class FaculityController {
     delete(req,res){
         var faculty= req.params.id
         faculty = faculty.split('.')
-        var classID = faculty[1]
+        var facultyID = faculty[1]
         var id = faculty[0]
-        console.log(classID)
+        console.log(facultyID)
         console.log(id)
-        AccountModel.updateMany({classID:classID, role:"student"},{classID:"None"},function(err,result){
-            AccountModel.updateMany({classID:classID, role:"coordinator"},{classID:"None"},function(err,result1){
+        AccountModel.updateMany({facultyID:facultyID, role:"student"},{facultyID:"None"},function(err,result){
+            AccountModel.updateMany({facultyID:facultyID, role:"coordinator"},{facultyID:"None"},function(err,result1){
                 FaculityModel.deleteOne({
                     _id : id
                 })
@@ -127,7 +127,7 @@ class FaculityController {
             let username = req.body.username;
             let password = req.body.password;
             let email = req.body.email;
-            let classID = req.body.classID;
+            let facultyID = req.body.facultyID;
             
             const salt = bcrypt.genSaltSync(saltRounds);
             const hash = bcrypt.hashSync(password, salt);
@@ -135,7 +135,7 @@ class FaculityController {
                 username,
                 password :hash,
                 email,
-                classID  
+                facultyID  
             })
             newStudent.save(function(err,data){
             if(err){
@@ -147,9 +147,9 @@ class FaculityController {
     }
 
     allstudent(req,res){
-            // FaculityModel.find({faculityname:req.params.classID})
+            // FaculityModel.find({faculityname:req.params.facultyID})
             AccountModel.find({
-                classID: req.params.classID,
+                facultyID: req.params.facultyID,
                 'role' :'student'
             })
             .then(data=>{
@@ -161,7 +161,7 @@ class FaculityController {
 
     coordinator(req,res){ 
         AccountModel.find({
-            classID: req.params.classID,
+            facultyID: req.params.facultyID,
             role :'coordinator'
         })
         .then(data=>{
@@ -172,8 +172,8 @@ class FaculityController {
            
     //sơn test|
     viewmanagine(req,res){
-        let classID = req.params.classID
-        AccountModel.find({classID:classID,role:"student"},(err,data)=>{
+        let facultyID = req.params.facultyID
+        AccountModel.find({facultyID:facultyID,role:"student"},(err,data)=>{
         if(err){
             console.log(err)
         }

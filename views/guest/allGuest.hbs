@@ -50,12 +50,15 @@
       <tr>
         <th>Username</th>
         <th>Email</th>
+        <th>Faculty</th>
         <th colspan="2">Action</th>
       </tr>
         {{#each account}}  
           <tr>
             <td>{{username}}</td>
             <td>{{email}}</td>
+            <td>{{facultyID}}</td>
+
             <td><a href="/guest/delete{{_id}}">Delete</a></td>
             <td><a href="/guest/update{{_id}}">Update</a></td>
           </tr>

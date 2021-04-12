@@ -10,7 +10,7 @@ guestRoute.use('/public', express.static('public'));
 guestRoute.use(checkAuth);
 
 //hiển thị các khoa 
-guestRoute.get('/danhsachsvien:classID', guestController.allcontribution)
+guestRoute.get('/danhsachsvien:facultyID', guestController.allcontribution)
 //xem các bài đăng từ các khoa 
 guestRoute.get('/danhgiabaibao:id', guestController.readcontribution)
 //crud

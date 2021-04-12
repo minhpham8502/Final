@@ -2,6 +2,8 @@
 const { JsonWebTokenError } = require('jsonwebtoken');
 const AccountModel = require('../models/account');
 const FaculityModel = require('../models/faculity')
+const fileModel = require('../models/file')
+
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 const { data } = require('jquery');
@@ -38,14 +40,18 @@ let indexStudent = (req,res)=>{
 }
 
 let indexGuest = (req,res)=>{
-    FaculityModel.find({
-    })
-    .then(data=>{
-        res.render('./home/homeGuest',{faculity:data})
-    })
-    .catch(err=>{
-        res.json("loi sever")
-    })
+    let facultyID = req.cookies.facultyID;
+        fileModel.find({facultyID:facultyID,status: "Pass"},function(err,result){
+            if(err){
+                console.log(err) }else{
+                    fileModel.find({facultyID:facultyID,status2: "Pass"},function(err,result2){
+                        if(err){
+                            console.log(err) }else{
+                            res.render('guest/baocuahocsinh',{data:result,data2:result2})
+                        }
+                    })          
+            }
+        }) 
 }
 
 let indexManager = (req,res)=>{
@@ -102,7 +108,7 @@ let loginController = function(req,res){
             let user = req.user 
             res.cookie('email',user.email, { maxAge: 90000000, httpOnly: true });
             res.cookie('id',user._id, { maxAge: 90000000, httpOnly: true });
-            res.cookie('classID',user.classID, { maxAge: 90000000, httpOnly: true });
+            res.cookie('facultyID',user.facultyID, { maxAge: 90000000, httpOnly: true });
             if(user.role === "admin"){
                 res.redirect("./indexAdmin")
             }
