@@ -15,7 +15,7 @@
   <% data.forEach(function(data) { %>
       <tr>
           <%if (data.status =="Pass" &&! data.nameFile2) { %>
-              <!-- <p>You can download the file here<a href="/download/<%= data._id %>"><%= data.nameFile %></a></p> -->
+              <p>You can download the file here<a href="/download/<%= data._id %>"><%= data.nameFile %></a></p>
               <iframe src="/<%= data.filePath %>" class="viewfiles"></iframe>
               <%if (data.filePathAnh) { %>
                 <img src="/<%= data.filePathAnh %>" alt="photo for report">
