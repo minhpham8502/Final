@@ -13,7 +13,7 @@ const AccountSchema = new Schema({
     username: String,
     password: String,
     email : String,
-    classID: String,
+    facultyID: String,
     role : {
         type : String,
         default : "student"

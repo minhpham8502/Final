@@ -31,7 +31,7 @@ const DashboardSchema = new Schema({
         default : "0"
     },
 
-    classID: String
+    facultyID: String
 },
 {
     collection: 'Dashboard'

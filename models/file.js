@@ -23,7 +23,7 @@ var picSchema= new mongoose.Schema({
         type : String,
         default : ""
     },
-    classID :String,
+    facultyID :String,
     filePathdoc2:String,
     filePath2:String,
     nameFile2 : String,
