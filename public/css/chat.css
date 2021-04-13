@@ -13,18 +13,7 @@
   overflow: auto;
 }
 
-.online-circle {
-  border-radius: 5rem;
-  width: 5rem;
-  height: 5rem;
-}
-
 .messages-title {
-  float: right;
-  margin: 0px 5px;
-}
-
-.message-img {
   float: right;
   margin: 0px 5px;
 }
@@ -74,6 +63,6 @@
 }
 
 
-.text-muted{
+.text-email{
   font-size: 15px;
 }

@@ -94,7 +94,7 @@ class messtController {
                                     if (result && cookiesemail.email=== req.cookies.email && cookiesemail.facultyID === user.facultyID) {
                                         // if(cookiesemail=== req.cookies.email){
                                             console.log(cookiesemail.facultyID)
-                                            res.render("chat1.ejs", {
+                                            res.render("chat.ejs", {
                                                 cookiesemail: cookiesemail,
                                                 user: user,
                                                 data: result,
