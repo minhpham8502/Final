@@ -1,4 +1,4 @@
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
@@ -14,9 +14,9 @@ let update =(req,res)=>{
     //     )
    AccountModel.findById(req.params.id)
     .then((data)=>
-        FaculityModel.find(function(err,data){
+        FacultyModel.find(function(err,data){
         }).then(data1=>{
-        res.render('student/updatestudent',{account:data,faculity:data1})
+        res.render('student/updatestudent',{account:data,faculty:data1})
 
         })
     )
@@ -28,7 +28,7 @@ let deleteStudent = (req,res)=>{
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/faculity/allStudent/'+ facultyID)
+            res.redirect('/faculty/allStudent/'+ facultyID)
         })
     })
     
@@ -39,7 +39,7 @@ let doupdate =(req,res)=>{
         _id : req.params.id
     }, req.body)
     .then(()=>{
-        res.redirect('/faculity/allStudent/'+ req.body.facultyID)
+        res.redirect('/faculty/allStudent/'+ req.body.facultyID)
     })
 }
 

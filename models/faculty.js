@@ -11,16 +11,16 @@ mongoose.connect(url, {
 mongoose.set('useCreateIndex', true);
 
 const Schema = mongoose.Schema;
-const FaculitySchema = new Schema({ 
-    faculityname : String,
+const FacultySchema = new Schema({ 
+    facultyname : String,
     classID: String,
     deadline:String,
     deadline2:String,
   
 },{
-    collection : 'faculity',
+    collection : 'faculty',
     timestamps : true
 });
 
-var FaculityModel = mongoose.model('faculity', FaculitySchema)
-module.exports = FaculityModel
+var FacultyModel = mongoose.model('faculty', FacultySchema)
+module.exports = FacultyModel

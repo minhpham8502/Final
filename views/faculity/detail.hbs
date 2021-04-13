@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/faculity.css">
+    <link rel="stylesheet" href="/css/faculty.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -22,7 +22,7 @@
 <body>
   <div class="layout">
     <div class="header">
-        <form method="post" action="./faculity/search">
+        <form method="post" action="./faculty/search">
             <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="fa fa-bars" ></i>
@@ -36,21 +36,21 @@
             <div class="menu">
                 <ul>
                     <li><a href="/account/indexAdmin">Home</a></li>
-                    <li><a href="/faculity/allfaculity" >Faculty</a></li>
+                    <li><a href="/faculty/allfaculty" >Faculty</a></li>
                     <li><a href="/guest/allGuest">All Guest</a></li>
                     <li><a href="/manage/allManager">All manager</a></li>
                     <li><a href="/admin/createAccount">Create account</a></li>
-                    <li><a href="/faculity/create"> Create Faculty </a></li>
+                    <li><a href="/faculty/create"> Create Faculty </a></li>
                     <li><a href="/admin/addtoFaculty">Add to Faculty</a></li>
                 </ul>
 
             </div>
             <div class="content">
-            {{#each faculity}}  
+            {{#each faculty}}  
                 <div class="card" >                          
-                        <h5>{{faculityname}}</h5>                     
-                        <button><a href="/faculity/faculity/update/{{_id}}">Update</a></button>
-                        <button><a href="/faculity/faculity/delete/{{_id}}.{{facultyID}}">Delete</a></button>
+                        <h5>{{facultyname}}</h5>                     
+                        <button><a href="/faculty/faculty/update/{{_id}}">Update</a></button>
+                        <button><a href="/faculty/faculty/delete/{{_id}}.{{facultyID}}">Delete</a></button>
                 </div>
                 </div>
             {{/each}}   
@@ -74,11 +74,11 @@
 
 
 {{!-- <p>abc</p>
-{{#each faculity}}
+{{#each faculty}}
         <tr>
             <td>{{username}} </td>
             <td>{{email}} </td>
-            <td> <a href="/faculity/faculity/viewmanagine{{email}}">xem đóng góp</a></td>
+            <td> <a href="/faculty/faculty/viewmanagine{{email}}">xem đóng góp</a></td>
             <br><br>
 
         </tr>

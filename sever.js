@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 var AccountRoutes = require('./routes/account.route')
 var adminRoute = require('./routes/admin.route')
-var faculityRoute = require('./routes/faculity.route')
+var facultyRoute = require('./routes/faculty.route')
 var indexrouter = require('./routes/index.route')
 var studentRoute = require('./routes/student.route')
 var coordinatorRoute = require('./routes/coordinator.route')
@@ -49,7 +49,7 @@ app.use('/admin', adminRoute);
 app.use('/student', studentRoute);
 app.use('/coordinator', coordinatorRoute);
 app.use('/account', AccountRoutes);
-app.use('/faculity',faculityRoute);
+app.use('/faculty',facultyRoute);
 app.use('/',indexrouter);
 app.use('/file',fileRouter)
 app.use('/manage',manageRoutes)

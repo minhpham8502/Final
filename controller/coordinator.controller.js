@@ -1,4 +1,4 @@
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
@@ -8,9 +8,9 @@ var saltRounds = 10;
 let update =(req,res)=>{
     AccountModel.findById(req.params.id)
     .then((data)=>
-        FaculityModel.find(function(err,data){
+        FacultyModel.find(function(err,data){
         }).then(data1=>{
-        res.render('coordinator/updateCoordinator',{account:data,faculity:data1})
+        res.render('coordinator/updateCoordinator',{account:data,faculty:data1})
 
         })
     )
@@ -22,7 +22,7 @@ let deleteCoordinator = (req,res)=>{
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/faculity/Coordinator/'+ facultyID)
+            res.redirect('/faculty/Coordinator/'+ facultyID)
         })
     })
     
@@ -34,7 +34,7 @@ let doupdate =(req,res)=>{
         _id : req.params.id
     }, req.body)
     .then(()=>{
-        res.redirect('/faculity/Coordinator/'+ req.body.facultyID)
+        res.redirect('/faculty/Coordinator/'+ req.body.facultyID)
     })
 }
 

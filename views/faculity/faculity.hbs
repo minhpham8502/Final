@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/faculity.css">
+    <link rel="stylesheet" href="/css/faculty.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -23,7 +23,7 @@
 <body>
     <div class="layout">
         <div class="header">
-            <form method="post" action="./faculity/search">
+            <form method="post" action="./faculty/search">
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
           <i class="fa fa-bars"></i>
@@ -37,24 +37,24 @@
             <div class="menu">
                 <ul>
                     <li><a href="/account/indexAdmin">Home</a></li>
-                    <li><a href="/faculity/allfaculity" >Faculty</a></li>
+                    <li><a href="/faculty/allfaculty" >Faculty</a></li>
                     <li><a href="/guest/allGuest">All Guest</a></li>
                     <li><a href="/manage/allManager">All manager</a></li>
                     <li><a href="/admin/createAccount">Create account</a></li>
-                    <li><a href="/faculity/create"> Create Faculty </a></li>
+                    <li><a href="/faculty/create"> Create Faculty </a></li>
                     <li><a href="/admin/addtoFaculty">Add to Faculty</a></li>
                 </ul>
 
             </div>
             <div class="content">
-                {{#each faculity}}
+                {{#each faculty}}
                 <div class="card">
-                    <h5>{{faculityname}}</h5>
+                    <h5>{{facultyname}}</h5>
  
 
-                    <button><a href="/faculity/faculity/{{facultyID}}">Detail</a></button>
-                    <button><a href="/faculity/allStudent/{{facultyID}}">Edit Student</a></button>
-                    <button><a href="/faculity/Coordinator/{{facultyID}}">Marketing coordinator</a></button>
+                    <button><a href="/faculty/faculty/{{facultyID}}">Detail</a></button>
+                    <button><a href="/faculty/allStudent/{{facultyID}}">Edit Student</a></button>
+                    <button><a href="/faculty/Coordinator/{{facultyID}}">Marketing coordinator</a></button>
                 </div>
                 {{/each}}
             </div>

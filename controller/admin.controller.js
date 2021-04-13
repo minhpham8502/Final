@@ -1,20 +1,20 @@
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
 var DashboardtModel = require('../models/Dashboard')
 var fileModel = require('../models/file');
-const { findById } = require('../models/faculity');
+const { findById } = require('../models/faculty');
 var bcrypt = require('bcrypt');
 const { response } = require('express');
 var saltRounds = 10;
 class AdminController {
     createAccount(req,res ){
-        FaculityModel.find({},function(data){
+        FacultyModel.find({},function(data){
 
         }).then(data=>{
-             res.render("admin/createAccount", {faculity:data})
+             res.render("admin/createAccount", {faculty:data})
 
         })
     }
@@ -40,14 +40,14 @@ class AdminController {
             if(err){
                 console.log(err)
             }else{
-                FaculityModel.find({},function(data){})
+                FacultyModel.find({},function(data){})
                 .then(data=>{
                     if(role == "coordinator" && facultyID !="None"){
-                        res.redirect("/faculity/Coordinator/" + req.body.facultyID)  
+                        res.redirect("/faculty/Coordinator/" + req.body.facultyID)  
                     }else if(role == "coordinator" && facultyID ==="None"){
                         res.redirect('/admin/addtoFaculty')              
                     }else if(role == "student" && facultyID !="None"){
-                        res.redirect("/faculity/allStudent/" + req.body.facultyID)
+                        res.redirect("/faculty/allStudent/" + req.body.facultyID)
                     }else if(role == "student" && facultyID !="None"){
                         res.redirect('/admin/addtoFaculty')     
 
@@ -55,7 +55,7 @@ class AdminController {
                     //    var message= role + " cannot add classes"
                     //    AccountModel.deleteOne({_id: newAccount._id})
                     //    .then(()=>{
-                    //     res.render("admin/createAccount", {faculity:data,message: message}) 
+                    //     res.render("admin/createAccount", {faculty:data,message: message}) 
                     //    })
 
                     }else if (role == "guest" ){
@@ -67,7 +67,7 @@ class AdminController {
                         var message= role + " cannot add classes"
                         AccountModel.deleteOne({_id: newAccount._id})
                         .then(()=>{
-                         res.render("admin/createAccount", {faculity:data,message: message}) 
+                         res.render("admin/createAccount", {faculty:data,message: message}) 
                         })           
                     }
                 })
@@ -79,8 +79,8 @@ class AdminController {
     addtoFaculty(req,res ){
         AccountModel.find({facultyID:"None",role:"student"},function(err,result){
             AccountModel.find({facultyID:"None",role:"coordinator"},function(err,result2){
-                FaculityModel.find({},function(err,result3){
-                    res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculity: result3})
+                FacultyModel.find({},function(err,result3){
+                    res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculty: result3})
                 })
             })
         })

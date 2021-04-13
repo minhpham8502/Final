@@ -1,5 +1,5 @@
 var express = require('express');
-var FaculityModel = require('../models/faculity'); 
+var FacultyModel = require('../models/faculty'); 
 var manageRoute = express.Router();
 let {checkAuth,checkAdmin } = require('../middleware/index')
 // const { isEmail } = require('../middleware/index');
@@ -14,7 +14,7 @@ manageRoute.use(checkAuth);
 manageRoute.post('/settime', manageController.settime)
 
 //xem bài báo
-manageRoute.get('/allfaculity', manageController.allfaculity)
+manageRoute.get('/allfaculty', manageController.allfaculty)
 manageRoute.get('/allcontribution:facultyID', manageController.allcontribution)
 manageRoute.get('/viewStatistical:facultyID', manageController.allstatistical)
 manageRoute.get('/Statistical:facultyID', manageController.statistical)
@@ -23,7 +23,7 @@ manageRoute.get('/Statistical:facultyID', manageController.statistical)
 manageRoute.get('/readcontribution:id', manageController.readcontribution)
 
 //downloadfilezip
-manageRoute.get('/allfaculitymanager', manageController.allfaculitymanager)
+manageRoute.get('/allfacultymanager', manageController.allfacultymanager)
 // CRUD
 manageRoute.get('/allManager',manageController.allManager)
 

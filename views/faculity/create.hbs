@@ -23,7 +23,7 @@
 <body>
   <div class="layout">
     <div class="header">
-      <form method="post" action="./faculity/search">
+      <form method="post" action="./faculty/search">
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
           <i class="fa fa-bars"></i>
@@ -37,11 +37,11 @@
       <div class="menu">
         <ul>
                     <li><a href="/account/indexAdmin">Home</a></li>
-                    <li><a href="/faculity/allfaculity" >Faculty</a></li>
+                    <li><a href="/faculty/allfaculty" >Faculty</a></li>
                     <li><a href="/guest/allGuest">All Guest</a></li>
                     <li><a href="/manage/allManager">All manager</a></li>
                     <li><a href="/admin/createAccount">Create account</a></li>
-                    <li><a href="/faculity/create"> Create Faculty </a></li>
+                    <li><a href="/faculty/create"> Create Faculty </a></li>
                     <li><a href="/admin/addtoFaculty">Add to Faculty</a></li>
                 </ul>
 
@@ -49,11 +49,11 @@
       <div class="content">
         <h2>Create Faculty</h2>
         <div class="swap">
-        <form method="POST" action="/faculity/doCreate">
+        <form method="POST" action="/faculty/doCreate">
 
           <div class="form-group">
-            <label for="faculityname">Faculty Name</label>
-            <input type="text" name="faculityname" id="faculityname" required>
+            <label for="facultyname">Faculty Name</label>
+            <input type="text" name="facultyname" id="facultyname" required>
           </div>
             <br>
             <div class="form-group">

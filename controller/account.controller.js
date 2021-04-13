@@ -1,7 +1,7 @@
 // let {signUp} = require('../service/auth')
 const { JsonWebTokenError } = require('jsonwebtoken');
 const AccountModel = require('../models/account');
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const fileModel = require('../models/file')
 
 var jwt = require('jsonwebtoken');
@@ -32,7 +32,7 @@ let indexStudent = (req,res)=>{
     let email = req.cookies.email
     AccountModel.findOne({email : email})
     .then(data=>{
-        FaculityModel.findOne({},function(err, result){
+        FacultyModel.findOne({},function(err, result){
             var deadline = result.deadline
             res.render('./home/homeStudent',{account:data,deadline:deadline})
         })    

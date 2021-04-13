@@ -34,11 +34,11 @@
       <div class="menu">
         <ul>
           <li><a href="/account/indexAdmin">Home</a></li>
-          <li><a href="/faculity/allfaculity" >Faculty</a></li>
+          <li><a href="/faculty/allfaculty" >Faculty</a></li>
           <li><a href="/guest/allGuest">All Guest</a></li>
           <li><a href="/manage/allManager">All manager</a></li>
           <li><a href="/admin/createAccount">Create account</a></li>
-          <li><a href="/faculity/create"> Create Faculty </a></li>
+          <li><a href="/faculty/create"> Create Faculty </a></li>
           <li><a href="/admin/addtoFaculty">Add to Faculty</a></li>
       </ul>
 
@@ -73,8 +73,8 @@
           <td>
               <form action="/admin/doaddtoFaculty<%= data2._id %>" method="POST">
                   <select name="facultyID">
-                  <% faculity.forEach(function(faculity) { %>
-                  <option value="<%= faculity.facultyID %>" name="facultyID"><%= faculity.facultyID %></option>
+                  <% faculty.forEach(function(faculty) { %>
+                  <option value="<%= faculty.facultyID %>" name="facultyID"><%= faculty.facultyID %></option>
                   <% }); %>
                   </select>
                   <input type="submit" onclick="Function()" value="Add to faculty" class="btn">
@@ -114,8 +114,8 @@
             <td>
                 <form action="/admin/doaddtoFaculty<%= data._id %>" method="POST">
                     <select name="facultyID">
-                    <% faculity.forEach(function(faculity) { %>
-                    <option value="<%= faculity.facultyID %>" name="facultyID"><%= faculity.facultyID %></option>
+                    <% faculty.forEach(function(faculty) { %>
+                    <option value="<%= faculty.facultyID %>" name="facultyID"><%= faculty.facultyID %></option>
                     <% }); %>
                     </select>
                     <input type="submit" onclick="Function()" value="Add to faculty" class="btn">

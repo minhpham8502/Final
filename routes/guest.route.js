@@ -1,5 +1,5 @@
 var express = require('express');
-var FaculityModel = require('../models/faculity'); 
+var FacultyModel = require('../models/faculty'); 
 var guestRoute = express.Router();
 let {checkAuth,checkAdmin } = require('../middleware/index')
 const { isEmail } = require('../middleware/index');

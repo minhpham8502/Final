@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 let {checkAuth } = require('../middleware/index')
 var AccountModel = require('../models/account')
 const nodemailer =  require('nodemailer');
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 //word to pdf:  npm i docx-pdf
 //have to install: npm i phantomjs-prebuilt 
 var docxConverter = require('docx-pdf');
@@ -53,7 +53,7 @@ fileRouter.get('/fileSubmited',(req,res)=>{
     let minutes = date_ob.getMinutes().toString().padStart(2, "0");;
     let year = date_ob.getFullYear();
     dl = year + "-" + month + "-" + date + " " + hour + ":" + minutes;
-    FaculityModel.findOne({},function(err,result){
+    FacultyModel.findOne({},function(err,result){
         fileModel.find({studentemail:email},(err,data)=>{
             if(err){
                 console.log(err)

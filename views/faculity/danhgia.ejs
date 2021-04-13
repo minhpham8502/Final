@@ -13,7 +13,7 @@
 <body>
     <% data.forEach(function(data) { %>
     
-        <form action="/faculity/dodanhgiabaibao<%= data._id %>" method="POST">
+        <form action="/faculty/dodanhgiabaibao<%= data._id %>" method="POST">
 
             <p>You can download the file here<a href="/download/<%= data._id %>"><%= data.nameFile %></a></p>
             <iframe src="/<%= data.filePath %>" class="viewfiles">

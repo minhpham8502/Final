@@ -1,37 +1,37 @@
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
 var DashboardtModel = require('../models/Dashboard')
 var fileModel = require('../models/file');
-const { findById } = require('../models/faculity');
+const { findById } = require('../models/faculty');
 
-class FaculityController {
+class FacultyController {
     
     create(req,res){
-        res.render('./faculity/create')
+        res.render('./faculty/create')
     }
 
     detail(req,res){
         let facultyID = req.params.facultyID;
 
-        FaculityModel.find({
+        FacultyModel.find({
             facultyID : facultyID
         })
         .then(data=>{
             console.log(data)
-            res.render('./faculity/detail',{faculity:data})
+            res.render('./faculty/detail',{faculty:data})
         })
         
     }
 
-    allfaculity(req,res ){
-        FaculityModel.find({
+    allfaculty(req,res ){
+        FacultyModel.find({
 
         })
         .then(data=>{
-            res.render('./faculity/faculity',{faculity: data})
+            res.render('./faculty/faculty',{faculty: data})
         })
         .catch(err=>{
             res.json("loi sever")
@@ -39,39 +39,39 @@ class FaculityController {
     }
 
     search(req,res){
-        var faculityname = req.body.faculityname;
+        var facultyname = req.body.facultyname;
         var topic = req.body.topic;
-        FaculityModel.find({
-            faculityname : faculityname,   
+        FacultyModel.find({
+            facultyname : facultyname,   
         })
         .then(data=>{
-            res.render('./faculity/faculity',{faculity:data})
+            res.render('./faculty/faculty',{faculty:data})
         })
     }
 
     create(req,res,next){
-        res.render('./faculity/create')
+        res.render('./faculty/create')
     }
 
     update(req,res){
-        FaculityModel.findById(req.params.id)
+        FacultyModel.findById(req.params.id)
         .then(data=>
-            res.render('./faculity/update',{faculity:data})
+            res.render('./faculty/update',{faculty:data})
         )
     }
 
     docreate(req,res){
-        var faculitynme = req.body.faculityname
+        var facultynme = req.body.facultyname
 
-        var newFaculity = FaculityModel({
-            faculityname : faculitynme,
+        var newFaculty = FacultyModel({
+            facultyname : facultynme,
             topic : req.body.topic,
             facultyID: req.body.facultyID,
 
             student: []
         })
     
-        newFaculity.save(function(err){
+        newFaculty.save(function(err){
             if(err){
                 console.log(err)
             }else{
@@ -79,20 +79,20 @@ class FaculityController {
                     facultyID:req.body.facultyID
                 })
                 newDashboard.save(function(err){
-                    res.redirect('/faculity/allfaculity')
+                    res.redirect('/faculty/allfaculty')
                 })
-                // res.redirect('/faculity/allfaculity')
+                // res.redirect('/faculty/allfaculty')
             }
         })
     }
 
     doupdate(req,res){
         // var id1 = req.params.id
-        FaculityModel.updateOne({
+        FacultyModel.updateOne({
             _id : req.params.id
         }, req.body)
         .then(()=>{
-            res.redirect('/faculity/allfaculity')
+            res.redirect('/faculty/allfaculty')
         })
     }
 
@@ -105,11 +105,11 @@ class FaculityController {
         console.log(id)
         AccountModel.updateMany({facultyID:facultyID, role:"student"},{facultyID:"None"},function(err,result){
             AccountModel.updateMany({facultyID:facultyID, role:"coordinator"},{facultyID:"None"},function(err,result1){
-                FaculityModel.deleteOne({
+                FacultyModel.deleteOne({
                     _id : id
                 })
                 .then(()=>{
-                    res.redirect('/faculity/allfaculity')
+                    res.redirect('/faculty/allfaculty')
                 })
             })  
         })
@@ -117,10 +117,10 @@ class FaculityController {
     }
 
     addStudent(req,res){
-    //     FaculityModel.find(function(err,data){
-    //         res.render('./student/faculity_student',{faculity:data})    
+    //     FacultyModel.find(function(err,data){
+    //         res.render('./student/faculty_student',{faculty:data})    
     // })
-    res.render('./student/faculity_student',{faculity:data})    
+    res.render('./student/faculty_student',{faculty:data})    
     }
 
     doAddStudent(req,res){
@@ -141,13 +141,13 @@ class FaculityController {
             if(err){
                 console.log(err)
             }else{
-                res.render('./student/faculity_student')
+                res.render('./student/faculty_student')
             }
             })
     }
 
     allstudent(req,res){
-            // FaculityModel.find({faculityname:req.params.facultyID})
+            // FacultyModel.find({facultyname:req.params.facultyID})
             AccountModel.find({
                 facultyID: req.params.facultyID,
                 'role' :'student'
@@ -178,10 +178,10 @@ class FaculityController {
             console.log(err)
         }
         else if(data.length>0){
-            res.render('./faculity/baocuahocsinh',{account:data})
+            res.render('./faculty/baocuahocsinh',{account:data})
         }
         else{
-            res.render('./faculity/baocuahocsinh',{account:data})
+            res.render('./faculty/baocuahocsinh',{account:data})
         }
         })
     }
@@ -201,10 +201,10 @@ class FaculityController {
             console.log(err)
         }
         else if(data.length>0){
-            res.render('faculity/danhgia.ejs',{data:data})
+            res.render('faculty/danhgia.ejs',{data:data})
         }
         else{
-            res.render('faculity/danhgia.ejs',{data:data})
+            res.render('faculty/danhgia.ejs',{data:data})
         }
         })
     }
@@ -223,7 +223,7 @@ class FaculityController {
                 comment: comment
             })
             .then(()=>{
-                res.redirect('/faculity/allDocument/' + studentemail)
+                res.redirect('/faculty/allDocument/' + studentemail)
             })
         })
     }
@@ -235,10 +235,10 @@ class FaculityController {
             console.log(err)
         }
         else if(data.length>0){
-            res.render('faculity/danhgia2nd.ejs',{data:data})
+            res.render('faculty/danhgia2nd.ejs',{data:data})
         }
         else{
-            res.render('faculity/danhgia2nd.ejs',{data:data})
+            res.render('faculty/danhgia2nd.ejs',{data:data})
         }
         })
     }
@@ -257,9 +257,9 @@ class FaculityController {
                 comment2: comment2
             })
             .then(()=>{
-                res.redirect('/faculity/allDocument/' + studentemail)
+                res.redirect('/faculty/allDocument/' + studentemail)
             })
         })
     }
 }
-module.exports = new FaculityController;
+module.exports = new FacultyController;

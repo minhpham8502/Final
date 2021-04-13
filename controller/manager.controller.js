@@ -1,4 +1,4 @@
-const FaculityModel = require('../models/faculity')
+const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
 const { data, param, css } = require('jquery')
 var jwt = require('jsonwebtoken')
@@ -16,11 +16,11 @@ class manageController {
         someDate.setDate(someDate.getDate() + 14);
         var dateFormated = someDate.toISOString().substr(0, 10);
         let deadline2 = dateFormated + " " + time;
-        FaculityModel.updateMany({}, { deadline: deadline1, deadline2: deadline2 }, function (err, data) {
+        FacultyModel.updateMany({}, { deadline: deadline1, deadline2: deadline2 }, function (err, data) {
             if (err) {
                 res.json("")
             }
-            FaculityModel.find({}, function (err, data) {
+            FacultyModel.find({}, function (err, data) {
                 if (err) {
                     res.json("")
                 }
@@ -31,10 +31,10 @@ class manageController {
     }
 
     //hiển thị tất cả các khoa
-    allfaculity(req, res) {
-        FaculityModel.find({})
+    allfaculty(req, res) {
+        FacultyModel.find({})
             .then(data => {
-                res.render('./marketingmanager/allfaculity', { faculity: data })
+                res.render('./marketingmanager/allfaculty', { faculty: data })
             })
             .catch(err => {
                 res.json("loi sever")
@@ -132,10 +132,10 @@ statistical(req, res) {
         })
     }
 
-    allfaculitymanager(req, res) {
-        FaculityModel.find({})
+    allfacultymanager(req, res) {
+        FacultyModel.find({})
             .then(data => {
-                res.render('./marketingmanager/allfaculitymanager', { faculity: data })
+                res.render('./marketingmanager/allfacultymanager', { faculty: data })
             })
             .catch(err => {
                 res.json("loi sever")
