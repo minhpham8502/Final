@@ -48,9 +48,6 @@
   float: left;
 }
 
-.messages-list li.messages-you .message-img {
-  float: left;
-}
 
 .messages-list li.messages-you p {
   float: left;
@@ -75,18 +72,7 @@
 .ql-editor p {
   font-size: 1rem;
 }
-.image_file_me{
-  width: 70%;
-  height: 70%;
-  float: right;
-  margin: 5px;
- 
-}
-.image_file_me img,video{
-  max-width: 60%;
-  max-height: 60%;
-  float: right;
-}
+
 
 .text-muted{
   font-size: 15px;
