@@ -51,14 +51,16 @@ class AdminController {
                     }else if(role == "student" && facultyID !="None"){
                         res.redirect('/admin/addtoFaculty')     
 
-                    // }else if (role == "guest" && facultyID != "None"){
+                    }else if (role == "guest" && facultyID === "None"){
                     //    var message= role + " cannot add classes"
                     //    AccountModel.deleteOne({_id: newAccount._id})
                     //    .then(()=>{
                     //     res.render("admin/createAccount", {faculty:data,message: message}) 
                     //    })
+                    res.redirect('/admin/addtoFaculty')     
 
-                    }else if (role == "guest" ){
+
+                    }else if (role == "guest" && facultyID != "None" ){
                         res.redirect("/guest/allGuest")  
 
                     }else if(role == "manager" && facultyID === "None"){
@@ -79,8 +81,11 @@ class AdminController {
     addtoFaculty(req,res ){
         AccountModel.find({facultyID:"None",role:"student"},function(err,result){
             AccountModel.find({facultyID:"None",role:"coordinator"},function(err,result2){
-                FacultyModel.find({},function(err,result3){
-                    res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculty: result3})
+                AccountModel.find({facultyID:"None",role:"guest"},function(err,result4){
+                    console.log(result4)
+                    FacultyModel.find({},function(err,result3){
+                        res.render("admin/addtoFaculty.ejs",{data:result,data2:result2,faculty: result3,data3 : result4})
+                    })
                 })
             })
         })

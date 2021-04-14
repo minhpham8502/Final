@@ -20,21 +20,25 @@ let indexAdmin = (req,res)=>{
 
 let indexCoordinator = (req,res)=>{
     let email = req.cookies.email
+    let facultyID = req.cookies.facultyID
+
     AccountModel.findOne({email : email})
     .then(data=>{
-        console.log(data)
-        res.render('./home/homeCoordinator',{account:data})
-
+        FacultyModel.findOne({facultyID: facultyID},function(err, result){
+            res.render('./home/homeCoordinator',{account:data,faculty :result})
+        })    
     })
 }
 
 let indexStudent = (req,res)=>{
     let email = req.cookies.email
+    let facultyID = req.cookies.facultyID
+
     AccountModel.findOne({email : email})
     .then(data=>{
-        FacultyModel.findOne({},function(err, result){
+        FacultyModel.findOne({facultyID: facultyID},function(err, result){
             var deadline = result.deadline
-            res.render('./home/homeStudent',{account:data,deadline:deadline})
+            res.render('./home/homeStudent',{account:data,deadline:deadline,faculty :result})
         })    
     })
 }

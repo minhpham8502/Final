@@ -18,9 +18,6 @@ const AccountSchema = new Schema({
         type : String,
         default : "student"
     },
-    friend:[{
-        email: String
-    }],
     phone: String,
     address : String,
     birthday : String,

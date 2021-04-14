@@ -132,6 +132,47 @@
           <% }); %>
 
         </table>
+
+        <% if(data3.length != 0){ %>
+          <h1>Add Guest to faculty</h1>
+      <table class="table">
+        <tr class="table1">
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      <% } %>
+        <% data3.forEach(function(data3) { %>
+        <tr>
+          <td>
+            <p><%= data3.username %></p>
+          </td>
+          <td>
+            <p><%= data3.email %></p>
+          </td>
+          <td>
+            <p><%= data3.role %></p>
+          </td>
+          <td>
+              <form action="/admin/doaddtoFaculty<%= data3._id %>" method="POST">
+                  <select name="facultyID">
+                  <% faculty.forEach(function(faculty) { %>
+                  <option value="<%= faculty.facultyID %>" name="facultyID"><%= faculty.facultyID %></option>
+                  <% }); %>
+                  </select>
+                  <input type="submit" onclick="Function()" value="Add to faculty" class="btn">
+              </form> 
+          </td>
+          <script>
+            function Function() {
+              alert("Successfully added")
+            }
+            </script>
+        </tr>
+        <% }); %>
+
+      </table>
       </div>
     </div>
   </div>
