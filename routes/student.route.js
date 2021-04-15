@@ -13,9 +13,4 @@ studentRoute.get('/delete:id',studentController.deleteStudent)
 
 studentRoute.post('/doupdate:id', studentController.doupdate)
 
-
-/// test
-studentRoute.get('/chat/:id',studentController.chat)
-// studentRoute.post('/doupdate:id', studentController.doupdate)
-
 module.exports = studentRoute

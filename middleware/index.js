@@ -1,7 +1,8 @@
 // let { checkEmail} = require('../service/auth')
 // let accountmodel = require('../models/account');
 let AccountModel = require('../models/account');
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
+const FacultyModel = require('../models/faculty');
 // let checkEmail = (email)=>{
 //     return AccountModel.findOne({email:email})
 
@@ -17,7 +18,35 @@ let isEmail = async (req,res,next)=>{
                 next();
             }else{
                 return res.status(400).json({
-                    message : "email da ton tai",
+                    message : "Email already exists",
+                    status: 400,
+                    error : true,
+                })
+            }
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : "loi sever",
+            status: 500,
+            error : true
+        })
+
+    }
+}
+let checkFacultyID = async (req,res,next)=>{
+    try {
+        // let user = await checkEmail(req.body.email) 
+        let facultyID = req.body.facultyID;
+        await FacultyModel.findOne({
+            facultyID:facultyID
+        }).then(facultyID=>{
+            if(!facultyID){
+                next();
+            }else{
+                return res.status(400).json({
+                    message : "Faculty already exists",
                     status: 400,
                     error : true,
                 })
@@ -133,5 +162,6 @@ module.exports ={
     checkAuth,
     getUserById,
     checkCoordinator,
-    checkStudent
+    checkStudent,
+    checkFacultyID
 }

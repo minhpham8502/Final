@@ -1,7 +1,7 @@
 var express = require('express');
 var FacultyModel = require('../models/faculty'); 
 var facultyRoute = express.Router();
-let {checkAuth,checkAdmin,checkCoordinator } = require('../middleware/index')
+let {checkAuth,checkAdmin,checkCoordinator,checkFacultyID } = require('../middleware/index')
 const { isEmail } = require('../middleware/index');
 
 const facultyController = require('../controller/faculty.controller');
@@ -41,7 +41,7 @@ facultyRoute.get('/faculty/delete/:id',facultyController.delete)
 
 
 facultyRoute.post('/doupdate:id', facultyController.doupdate)
-facultyRoute.post('/doCreate', facultyController.docreate)
+facultyRoute.post('/doCreate', checkFacultyID,facultyController.docreate)
 
 
 // tương tác với học sinh

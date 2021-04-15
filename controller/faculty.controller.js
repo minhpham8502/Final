@@ -1,5 +1,7 @@
 const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
+
+
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
@@ -101,15 +103,20 @@ class FacultyController {
         faculty = faculty.split('.')
         var facultyID = faculty[1]
         var id = faculty[0]
-        console.log(facultyID)
-        console.log(id)
+        
+
+
         AccountModel.updateMany({facultyID:facultyID, role:"student"},{facultyID:"None"},function(err,result){
             AccountModel.updateMany({facultyID:facultyID, role:"coordinator"},{facultyID:"None"},function(err,result1){
-                FacultyModel.deleteOne({
-                    _id : id
-                })
-                .then(()=>{
-                    res.redirect('/faculty/allfaculty')
+                DashboardtModel.deleteOne({
+                    facultyID : facultyID
+                }).then(()=>{
+                    FacultyModel.deleteOne({
+                        _id : id
+                    })
+                    .then(()=>{
+                        res.redirect('/faculty/allfaculty')
+                    })
                 })
             })  
         })

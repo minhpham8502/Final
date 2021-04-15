@@ -1,5 +1,7 @@
 const FacultyModel = require('../models/faculty')
 const AccountModel = require('../models/account')
+const FileModel = require('../models/file')
+
 const { data, param, css } = require('jquery')
 var jwt =require('jsonwebtoken')
 var bcrypt = require('bcrypt');
@@ -24,11 +26,15 @@ let update =(req,res)=>{
 let deleteStudent = (req,res)=>{
     AccountModel.findById({_id:req.params.id},function(err,data){
         let facultyID = data.facultyID
+        let email = data.email
         AccountModel.deleteOne({
             _id :  req.params.id
         })
         .then(()=>{
-            res.redirect('/faculty/allStudent/'+ facultyID)
+            FileModel.deleteMany({studentemail: email},function(){
+                res.redirect('/faculty/allStudent/'+ facultyID)
+
+            })
         })
     })
     
@@ -43,18 +49,10 @@ let doupdate =(req,res)=>{
     })
 }
 
-let chat = (req,res)=>{
-    AccountModel.findOne({
-        _id : req.params.id,
-    }).then(data=>{
-    // res.render('./student/chat',{account:data})
-         res.render('index',{account:data})
-    })
-}
 
 module.exports ={
     doupdate,
     deleteStudent,
     update,
-    chat
+    
 }
